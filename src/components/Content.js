@@ -8,8 +8,10 @@ const Content=({course})=>{
   
     return(
         <div>
-        <Parts course={course}/>
-        <Total course={course} />
+          
+          
+        <Parts course={course} />
+        <Total course={course}  />  
         
       
         </div>

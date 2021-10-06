@@ -28,7 +28,9 @@ const App = () => {
         id: 4
       }
     ]
-  }
+  },
+
+  
 
   return <Course course={course} />
 }
