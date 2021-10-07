@@ -15,14 +15,14 @@ const Parts=({course})=>{
                
                
            })}
-           <h3>Total of
+           <h3>
 
-{course[0].parts.reduce((items,value)=>{
+           Total of {course[0].parts.reduce((items,value)=>{
     return  items+value.exercises
 
-},0)}
+},0)} exercises
 
-exercises
+
 
 
 </h3>
@@ -34,16 +34,12 @@ exercises
                
            })}
 
-<h3>Total of
+<h3> 
 
-{course[1].parts.reduce((items,value)=>{
+Total of {course[1].parts.reduce((items,value)=>{
    return  items+value.exercises
 
-     },0)}
-
-exercises
-
-
+     },0)} exercises
 </h3>
        </div>
         
@@ -55,6 +51,7 @@ exercises
 }
 
 export default Parts
+
 
 
 
