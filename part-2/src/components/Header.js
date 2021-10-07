@@ -4,10 +4,10 @@ const Header=({course})=>{
 
     return(
         <div>
-            <h1>
-                {course.name}
+            <h2>
+                {course[0].name}
 
-            </h1>
+            </h2>
 
         </div>
     )

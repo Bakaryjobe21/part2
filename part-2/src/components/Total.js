@@ -4,17 +4,10 @@ const Total=({course})=>{
 
    return(
        <div>
-           <p>Total of
-
-           {course.parts.reduce((items,value)=>{
-               return  items+value.exercises
-
-           },0)}
-
-           exercises
            
 
-           </p>
+
+           
 
         </div>
     )
