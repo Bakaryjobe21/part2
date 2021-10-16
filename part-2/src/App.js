@@ -4,12 +4,17 @@ import React, { useState } from 'react'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas'}
+    { name: 'Arto Hellas',number:1829}
   ]) 
   const [ newName, setNewName ] = useState('')
+  const [newNumber,setNewNumber]=useState(0)
 
   const name=(e)=>{
     setNewName(e.target.value)
+  }
+
+  const number=(e)=>{
+    setNewNumber(e.target.value)
   }
 
   const  addPerson= (event) => {
@@ -18,7 +23,7 @@ const App = () => {
     const noteObject = {
 
       name: newName,
-      id:1
+      number:newNumber
     }
     
     //noteObject.name===secName?  window.alert(`${noteObject.name} is not part of the phonebook`):
@@ -32,6 +37,7 @@ const App = () => {
   }
    
     setNewName('')
+    setNewNumber()
   }
 
   
@@ -50,13 +56,15 @@ const App = () => {
         <div>
           name: <input value={newName} onChange={name}/>
         </div>
+         <div>number: <input value={newNumber} onChange={number} /></div>
+
         <div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       {persons.map((names)=>{
-        return <div> <p key={names.name}>{names.name}</p></div>
+        return <div> <p key={names.name}>{names.name} {names.number}</p></div>
       })}
       
     </div>
