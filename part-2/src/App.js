@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
+
+
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas'}
   ]) 
   const [ newName, setNewName ] = useState('')
 
@@ -18,17 +20,28 @@ const App = () => {
       name: newName,
       id:1
     }
-   // const isPerson =persons.some(p=>{p.secName===name})?
+    
     //noteObject.name===secName?  window.alert(`${noteObject.name} is not part of the phonebook`):
     setPersons(persons.concat(noteObject))
+    const isPerson =persons.some(p=>p.name===newName)
+
+  if(isPerson){
+    window.alert(`${newName} is already part of the phonebook`)
+
+
+  }
+   
     setNewName('')
   }
+
+  
+
+  
   
  // ? notes
   //: notes.filter(note => note.important === true)
 
 
-  
 
   return (
     <div>
@@ -43,7 +56,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       {persons.map((names)=>{
-        return <div> {names.name}</div>
+        return <div> <p key={names.name}>{names.name}</p></div>
       })}
       
     </div>
