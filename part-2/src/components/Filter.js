@@ -1,12 +1,20 @@
 import React from 'react'
 
-const Filter = ({persons }) => {
-  const name=  persons.filter((value)=>{
-        return value.name
-    })
+const Filter = ({persons,newName,name,addPerson}) => {
+  
     return (
         <div>
-            {name.map((i)=>{
+            
+                <div>
+                Search:<input value={newName}  onChange={name}/>
+                </div>
+                
+
+               {persons.filter((value)=>{
+        return value.name===newName
+    })} 
+
+            {persons.map((i)=>{
                 return <div> <p> {i.name }</p> </div>
             })}
             

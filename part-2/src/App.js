@@ -9,10 +9,14 @@ const App = () => {
     { name: 'Arto Hellas',number:1829}
   ]) 
   const [ newName, setNewName ] = useState('')
+  const[search,setSearch]=useState('')
   const [newNumber,setNewNumber]=useState(0)
 
   const name=(e)=>{
     setNewName(e.target.value)
+  }
+  const name2=(e)=>{
+    setSearch(e.target.value)
   }
 
   const number=(e)=>{
@@ -55,7 +59,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
 
-       <Filter persons={persons} newName={newName}/>
+       <Filter persons={persons} newName={newName} name2={name2} addPerson={addPerson}/>
 
       <h3>Add a new</h3>
       <PersonForm addPerson={addPerson} newName={newName} newNumber={newNumber} name={name} number={number}/>
