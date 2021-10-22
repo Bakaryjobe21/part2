@@ -5,7 +5,7 @@ import './index.css'
 //import Persons from './components/Persons'
 //import Filter from './components/Filter'
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+
 //import { buildQueries } from '@testing-library/dom'
 
 
@@ -69,7 +69,7 @@ const App = () => {
 
   
     setNewName('')
-    setNewNumber()
+    setNewNumber()  
   }
   
   
