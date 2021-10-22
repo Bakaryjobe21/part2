@@ -5,7 +5,7 @@ import './index.css'
 //import Persons from './components/Persons'
 //import Filter from './components/Filter'
 import React, { useState, useEffect } from 'react'
-
+import axios from 'axios'
 //import { buildQueries } from '@testing-library/dom'
 
 
@@ -47,7 +47,7 @@ const App = () => {
 
       name: newName,
       number:newNumber,
-      important: Math.random() > 0.5
+      
       
     }
 
@@ -71,7 +71,31 @@ const App = () => {
     setNewName('')
     setNewNumber()  
   }
+
+  const remove =(id)=>{
+    const url = `http://localhost:3001/persons/${id}`
+    const personObject = {
+
+      name: newName,
+      number:newNumber,
+      
+      
+    }
   
+    axios.delete(url).then(response => {
+      setPersons(persons.filter(per => per.id !== id ))
+      
+    } )
+    if(setPersons){
+      
+      window.alert(`delete ${persons.map((name)=>{
+        return name.name
+      })}  ?`)
+  
+  }
+  }
+    
+   
   
   return (
     <div>
@@ -92,7 +116,7 @@ const App = () => {
       
       <h3>Numbers</h3>
       {persons.map((names,index)=>{
-        return <div> <p key={index}> {names.name} {names.number} </p></div>
+        return <div> <p key={index}> <Person person={names} remove={() => remove(names.id) } />  </p></div>
        
       })}
 
@@ -106,6 +130,26 @@ const App = () => {
   )
 }
 
+const Person = ({ person,  remove }) => {
+  const bottonStyle = {
+    color: 'white',
+    backgroundColor:'red'
+
+    
+  }
+
+  
+
+  return (
+    <p>
+      {person.name}  {person.number}    <button onClick={remove} style={bottonStyle}>Delete</button>
+
+
+     
+      
+    </p>
+  )
+}
 
 
 
