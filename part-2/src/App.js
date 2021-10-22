@@ -12,7 +12,8 @@ import axios from 'axios'
 const App = () => {
 
   const [persons, setPersons] = useState([])
- 
+  const [succesMessage, setSuccessMessage] = useState(null)
+
 
 
   useEffect(() => {
@@ -55,8 +56,12 @@ const App = () => {
     .create(personObject)
     .then(response => {
       setPersons(persons.concat(response.data))
-     
-    })
+
+      setSuccessMessage( `Added '${personObject.name}'`)
+  })
+  setTimeout(() => {
+    setSuccessMessage(null)
+  }, 5000)
    
     
     const isPerson =persons.some(p=>p.name===newName)
@@ -100,7 +105,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-
+      <Notification message={succesMessage}  />
   
       <h3>Add a new</h3>
       <form onSubmit={addPerson}>
@@ -151,6 +156,18 @@ const Person = ({ person,  remove }) => {
   )
 }
 
+const Notification = ({ message, clss }) => {
+  if(message==null){
+    return null
+  }
+  
+    return (
+      <div style={{color:'green',fontSize:30}}>
+        {message}
+      </div>
+    )
+  }
+  
 
 
 export default App
