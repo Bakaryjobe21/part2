@@ -119,6 +119,8 @@ const App = () => {
       <h2>Phonebook</h2>
       <Notification message={succesMessage}  />
       <Notification2 message={errorMessage}   />
+      <br/>
+      <br/>
 
       <div>
        Search:<input value={search}  onChange={searchName}/>
@@ -196,7 +198,7 @@ const Notification = ({ message }) => {
   }
   
   return (
-    <div style={{color:'green',fontSize:30}}>
+    <div style={{color:'green',fontSize:30, borderStyle:'solid',borderColor:'green',backgroundColor:'lightgrey', padding:5}}>
       {message}
     </div>
   )
@@ -210,7 +212,7 @@ const Notification = ({ message }) => {
     }
     
     return (
-      <div style={{color:'red',fontSize:30}}>
+      <div style={{color:'red',fontSize:30, borderStyle:'solid',borderColor:'red'}}>
         {message}
       </div>
     )
