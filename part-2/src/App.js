@@ -6,6 +6,7 @@ import './index.css'
 //import Filter from './components/Filter'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Filter from './components/Filter'
 //import { buildQueries } from '@testing-library/dom'
 
 
@@ -13,7 +14,7 @@ const App = () => {
 
   const [persons, setPersons] = useState([])
   const [succesMessage, setSuccessMessage] = useState(null)
-
+  const [errorMessage, setErrorMessage] = useState(null)
 
 
   useEffect(() => {
@@ -29,15 +30,20 @@ const App = () => {
 
 
   const [ newName, setNewName ] = useState('')
- // const[search,setSearch]=useState('')
+  const[search,setSearch]=useState('')
   const [newNumber,setNewNumber]=useState()
 
   const name=(e)=>{
     setNewName(e.target.value)
   }
+
+  const searchName=(e)=>{
+    setSearch(e.target.value)
+  }
  
 
   const number=(e)=>{
+    
     setNewNumber(e.target.value)
   }
 
@@ -86,42 +92,70 @@ const App = () => {
       
       
     }
+    
+    
   
     axios.delete(url).then(response => {
-      setPersons(persons.filter(per => per.id !== id ))
-      
+      setPersons(persons.filter((per)=>per.id !== id))
+
+      setErrorMessage(`'Name is deleted successfully`)
+
+      setTimeout(()=>{
+        setErrorMessage(null)
+      },5000)
     } )
-    if(setPersons){
+    
       
-      window.alert(`delete ${persons.map((name)=>{
-        return name.name
-      })}  ?`)
+      
+  
   
   }
-  }
-    
+ 
+        
    
   
   return (
     <div>
       <h2>Phonebook</h2>
       <Notification message={succesMessage}  />
+      <Notification2 message={errorMessage}   />
+
+      <div>
+       Search:<input value={search}  onChange={searchName}/>
+
+      </div>
+      
+                
   
       <h3>Add a new</h3>
+      <div>
       <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={name}/>
         </div>
-         <div>number: <input value={newNumber} onChange={number} /></div>
+         <div>
+           number: <input value={newNumber} onChange={number} />
+         </div>
 
         <div>
           <button type="submit" style={{ backgroundColor:'blue'}}>Add</button>
         </div>
         </form>
       
+
+      </div>
+     
       <h3>Numbers</h3>
-      {persons.map((names,index)=>{
-        return <div> <p key={index}> <Person person={names} remove={() => remove(names.id) } />  </p></div>
+      
+      {persons.filter((value)=>{
+    if(search==""){
+      return value
+    }
+    else if (value.name.toLowerCase().includes(search.toLocaleLowerCase())){
+     return value
+    }
+}).map((names)=>{
+        return <div> <ul key={names}   style={{listStyleType:'none'}}> <li><Person person={names}  remove={() => remove(names.id) } /> </li> </ul> </div>
        
       })}
 
@@ -156,18 +190,34 @@ const Person = ({ person,  remove }) => {
   )
 }
 
-const Notification = ({ message, clss }) => {
+const Notification = ({ message }) => {
   if(message==null){
     return null
   }
   
+  return (
+    <div style={{color:'green',fontSize:30}}>
+      {message}
+    </div>
+  )
+  
+   
+  }
+  
+  const Notification2 = ({ message}) => {
+    if(message==null){
+      return null
+    }
+    
     return (
-      <div style={{color:'green',fontSize:30}}>
+      <div style={{color:'red',fontSize:30}}>
         {message}
       </div>
     )
-  }
-  
+    
+     
+    }
+    
 
 
 export default App
