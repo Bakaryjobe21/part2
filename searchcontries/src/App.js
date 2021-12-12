@@ -30,13 +30,13 @@ const App = () => {
   return (
     <div>
       find countries <input value={searchFilter}  onChange={handleSearch} />
-      <ShowCountries  searchContries={searchContries}/>
+      <ShowCountries  searchContries={searchContries} setSearchFilter={setSearchFilter}/>
       
     </div>
   )
 }
 
-const ShowCountries=({searchContries})=>{
+const ShowCountries=({searchContries, setSearchFilter})=>{
   if(searchContries.length === 1){
     const country=searchContries[0]
     return(
@@ -59,8 +59,12 @@ const ShowCountries=({searchContries})=>{
     )
   }
   if(searchContries.length >  10) return <div>Too many matches, specify another filter</div>
-  return searchContries .map((con)=>{
-    return <div>{con.name.common}</div>
+  return searchContries .map((con)=> {
+    return (
+        <div key={con.name}>{con.name.common}  <button onClick={(e)=> setSearchFilter(e.target.value)}>show</button>
+        
+        </div>
+    ) 
   })
 
 }
