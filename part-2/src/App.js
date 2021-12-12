@@ -63,20 +63,27 @@ const App = () => {
     .then(response => {
       setPersons(persons.concat(response.data))
 
-      setSuccessMessage( `Added '${personObject.name}'`)
+      setSuccessMessage( `Added ${personObject.name}`)
   })
   setTimeout(() => {
     setSuccessMessage(null)
-  }, 5000)
+  },5000)
    
     
     const isPerson =persons.some(p=>p.name===newName)
+    
 
   if(isPerson){
     window.alert(`${newName} is already part of the phonebook`)
-
+    personService
+    .update(personObject).then(response=>{
+      setPersons(persons.concat(response.data))
+    })
 
   }
+  
+
+  
 
   
     setNewName('')
@@ -85,25 +92,28 @@ const App = () => {
 
   const remove =(id)=>{
     const url = `http://localhost:3001/persons/${id}`
-    const personObject = {
-
-      name: newName,
-      number:newNumber,
-      
-      
-    }
+    
     
     
   
     axios.delete(url).then(response => {
       setPersons(persons.filter((per)=>per.id !== id))
 
-      setErrorMessage(`'Name is deleted successfully`)
+      setErrorMessage(`Name is deleted successfully`)
 
       setTimeout(()=>{
         setErrorMessage(null)
       },5000)
     } )
+
+    const filtPer=persons.find((na)=>na.id==id)
+
+
+  if(filtPer){
+    window.alert(`Delete ${filtPer.name} ? `)
+
+
+  }
     
       
       
